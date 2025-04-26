@@ -37,11 +37,15 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Character\Animation\CharacterAnimation.cs" />
      <Compile Include="Assets\Scripts\Character\CharController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterInteraction.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterStats.cs" />
      <Compile Include="Assets\Scripts\Character\Gun\BulletMovement.cs" />
      <Compile Include="Assets\Scripts\Character\Gun\CharShooting.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemySpawner\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyStats.cs" />
      <Compile Include="Assets\Scripts\InteractingObjects\WaterTank\WaterTankInteraction.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

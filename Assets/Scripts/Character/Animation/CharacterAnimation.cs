@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class CharacterAnimation : MonoBehaviour
+{
+    public Animator animator;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void setMovement(float movement)
+    {
+        animator.SetFloat("movement", movement);
+    }
+
+    public void attack(){
+        animator.SetBool("attack", true);
+    }
+    
+}

@@ -6,6 +6,8 @@ using UnityEngine;
 public class CharController : MonoBehaviour
 {
 
+    public CharacterAnimation animate;
+
     [SerializeField] float moveSpeed = 4f;
 
     Vector3 forward, right;
@@ -27,11 +29,17 @@ public class CharController : MonoBehaviour
        if(Input.GetAxis("HorizontalKey") != 0.0f ||Input.GetAxis("VerticalKey") != 0.0f)
        {
             move();
+            animate.setMovement(moveSpeed);
        } 
+       else
+       {
+            animate.setMovement(0);
+       }
     }
 
     private void move()
     {
+
         Vector3 direction = new Vector3(Input.GetAxis("HorizontalKey"), 0, Input.GetAxis("VerticalKey"));
         Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("HorizontalKey");
         Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("VerticalKey");
@@ -42,12 +50,12 @@ public class CharController : MonoBehaviour
             thisMovement = Input.GetAxis("HorizontalKey");
         }
 
-            Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-            //transform.forward = heading;
-            transform.position += rightMovement;
-            if(thisMovement != previousMovement && previousMovement != 0.0f) flip();
+        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+        //transform.forward = heading;
+        transform.position += rightMovement;
+        if(thisMovement != previousMovement && previousMovement != 0.0f) flip();
     
-            transform.position += upMovement;
+        transform.position += upMovement;
 
         if(Input.GetAxis("HorizontalKey") != 0.0f)
         {

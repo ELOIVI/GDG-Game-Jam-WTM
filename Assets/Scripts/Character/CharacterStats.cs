@@ -5,22 +5,29 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    private int life;
-    private int water;
-    private int maxWater;
+    public int life;
+    public int water;
+    public int maxWater;
+    public float inmortalityTime;
+    private bool isInmortal;
 
     // Start is called before the first frame update
     void Start()
     {
-       life = 100; 
-       maxWater = 1000;
+       life = 5; 
+       maxWater = 500;
        water = maxWater;
+       isInmortal = false;
+       inmortalityTime = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(life <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public int getLife()
@@ -50,11 +57,21 @@ public class CharacterStats : MonoBehaviour
             water += amount;
         }
 
-        Debug.Log(water);
     }
 
     public void takeDamage(int damage)
     {
-        life -= damage;
+        if(!isInmortal)
+        {
+            isInmortal = true;
+            life -= damage;
+            StartCoroutine(timerInmortality());
+        }
+    }
+
+    private IEnumerator timerInmortality()
+    {
+        yield return new WaitForSeconds(inmortalityTime);
+        isInmortal = false;
     }
 }
