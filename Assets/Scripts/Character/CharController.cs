@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class CharController : MonoBehaviour
@@ -8,6 +9,9 @@ public class CharController : MonoBehaviour
     [SerializeField] float moveSpeed = 4f;
 
     Vector3 forward, right;
+
+    private float previousMovement = 1;
+    private float thisMovement = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +24,7 @@ public class CharController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if(Input.anyKey)
+       if(Input.GetAxis("HorizontalKey") != 0.0f ||Input.GetAxis("VerticalKey") != 0.0f)
        {
             move();
        } 
@@ -32,10 +36,30 @@ public class CharController : MonoBehaviour
         Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("HorizontalKey");
         Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("VerticalKey");
 
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
-        //transform.forward = heading;
-        transform.position += rightMovement;
-        transform.position += upMovement;
+
+        if(Input.GetAxis("HorizontalKey") != 0.0f)
+        {
+            thisMovement = Input.GetAxis("HorizontalKey");
+        }
+
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
+            //transform.forward = heading;
+            transform.position += rightMovement;
+            if(thisMovement != previousMovement && previousMovement != 0.0f) flip();
+    
+            transform.position += upMovement;
+
+        if(Input.GetAxis("HorizontalKey") != 0.0f)
+        {
+            previousMovement = thisMovement;
+        }
+
 
     }
+
+    private void flip()
+    {
+        transform.Rotate(0f, 180f, 0f);
+    }
+    
 }
